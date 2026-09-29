@@ -1,0 +1,10 @@
+{
+  "name": "Nearer to Him",
+  "short_name": "Nearer to Him",
+  "description": "A private, non-judgmental space to reflect on your walk with Christ.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#12121F",
+  "theme_color": "#12121F",
+  "icons": []
+}

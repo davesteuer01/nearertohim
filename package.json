@@ -1,0 +1,15 @@
+{
+  "name": "nearertohim",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Nearer to Him — private, non-judgmental discipleship self-assessment (working name, formerly 'Becoming Like Jesus'). No Church sponsorship or endorsement.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspace=@nearertohim/scoring",
+    "build:web": "npm run build --workspace=@nearertohim/web",
+    "dev:web": "npm run dev --workspace=@nearertohim/web"
+  }
+}
