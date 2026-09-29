@@ -2,11 +2,12 @@ import { describe, expect, it } from 'vitest';
 import { loadInstrument } from './index.js';
 
 describe('loadInstrument', () => {
-  it('loads the placeholder bundle, validates its shape, and freezes it', async () => {
+  it('loads the bundle, validates its shape, and freezes it', async () => {
     const instrument = await loadInstrument();
     expect(instrument.categories).toHaveLength(12);
     expect(instrument.questions).toHaveLength(103);
-    expect(instrument.content_status).toBe('placeholder');
+    // Phase 0 extraction is in: real source text, not yet human-verified against the PDF.
+    expect(instrument.content_status).toBe('extracted_pending_review');
     expect(() => {
       // @ts-expect-error — deep-frozen at runtime; ES module strict mode
       // turns this into a thrown TypeError rather than a silent no-op,
@@ -30,6 +31,20 @@ describe('loadInstrument', () => {
     expect(byId['12'].response_kind).toBe('covenant_4state');
     for (let i = 1; i <= 11; i++) {
       expect(byId[String(i)].response_kind).toBe('scale_1_7');
+    }
+  });
+
+  it('carries the source document\'s verbatim "Now Set the Score Aside" closing text', async () => {
+    const instrument = await loadInstrument();
+    expect(instrument.outro).toBeDefined();
+    expect(instrument.outro?.[0]).toBe('Now Set the Score Aside');
+    expect(instrument.outro?.at(-1)).toBe('The scorecard is not the destination. Jesus Christ is.');
+  });
+
+  it('every question is marked pending human review, not yet verified', async () => {
+    const instrument = await loadInstrument();
+    for (const q of instrument.questions) {
+      expect(q.review_status).toBe('pending');
     }
   });
 });

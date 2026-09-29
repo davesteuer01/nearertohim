@@ -5,6 +5,9 @@
   "description": "Instrument schema, fingerprint verification, and the frozen instrument JSON for Nearer to Him. This package never generates scripture, doctrine, or question wording — it only validates and freezes what a human reviewer has verified against the source document.",
   "type": "module",
   "main": "src/index.ts",
+  "scripts": {
+    "test": "vitest run --coverage"
+  },
   "dependencies": {
     "zod": "^3.23.8"
   },

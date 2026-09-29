@@ -33,15 +33,46 @@ export function ReflectionResult({
   if (!session || !result) return <div className="screen">Loading…</div>;
 
   if (!settled) {
+    // The source document's own "Now Set the Score Aside" closing section, quoted verbatim
+    // (see instrument.outro) rather than paraphrased — per the project's rule that nothing in
+    // this app invents doctrine or wording. outro[0] is the heading itself; the rest is body.
+    const outro = instrument.outro && instrument.outro.length > 1 ? instrument.outro : null;
+
     return (
-      <div className="screen" style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-        <p className="muted" style={{ fontSize: '1.1rem' }}>
-          Now set the score aside for a moment.
-        </p>
-        <p>
-          What matters most is what you noticed while answering — not a number. Take a breath before you look at
-          anything else.
-        </p>
+      <div className="screen" style={{ alignItems: 'center', textAlign: 'center' }}>
+        {outro ? (
+          <>
+            <h2 style={{ marginBottom: 0 }}>{outro[0]}</h2>
+            <div style={{ maxWidth: '38rem' }}>
+              {outro.slice(1).map((line, i) => {
+                const isShout = line === line.toUpperCase() && /[A-Z]/.test(line) && line.length > 3;
+                const isQuote = line.startsWith('"');
+                return (
+                  <p
+                    key={i}
+                    style={{
+                      fontWeight: isShout ? 700 : undefined,
+                      fontStyle: isQuote ? 'italic' : undefined,
+                      fontSize: isShout ? '1.15rem' : undefined,
+                    }}
+                  >
+                    {line}
+                  </p>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="muted" style={{ fontSize: '1.1rem' }}>
+              Now set the score aside for a moment.
+            </p>
+            <p>
+              What matters most is what you noticed while answering — not a number. Take a breath before you look at
+              anything else.
+            </p>
+          </>
+        )}
         <button type="button" className="btn btn-primary" onClick={() => setSettled(true)}>
           Continue
         </button>

@@ -28,6 +28,13 @@ export function Home({
           assessment content.
         </div>
       )}
+      {instrument.content_status === 'extracted_pending_review' && (
+        <div className="placeholder-banner">
+          This build uses the real question text extracted from the source document, but it has not yet had a final
+          human line-by-line check against the source PDF (Phase&nbsp;0's sign-off). Treat wording as provisional
+          until that review closes.
+        </div>
+      )}
 
       <div className="card">
         <h2>Full assessment</h2>

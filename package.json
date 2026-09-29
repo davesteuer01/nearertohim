@@ -8,7 +8,7 @@
     "apps/*"
   ],
   "scripts": {
-    "test": "npm run test --workspace=@nearertohim/scoring",
+    "test": "npm run test --workspace=@nearertohim/scoring && npm run test --workspace=@nearertohim/content",
     "build:web": "npm run build --workspace=@nearertohim/web",
     "dev:web": "npm run dev --workspace=@nearertohim/web"
   }

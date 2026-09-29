@@ -21,7 +21,10 @@ export const QuestionSchema = z.object({
   order: z.number().int().positive(),
   title: z.string().min(1),
   prompt: z.string().min(1),
-  timeframe_text: z.string().min(1),
+  // Empty when the source item's prompt doesn't isolate a separate "During the past X,"
+  // clause (most items phrase the timeframe inline in varied ways) — real content, not an
+  // extraction gap; only ~8 of 103 items match the isolable pattern.
+  timeframe_text: z.string(),
   anchors: z
     .object({ 1: z.string(), 4: z.string(), 7: z.string() })
     .partial()
@@ -56,7 +59,7 @@ export const InstrumentSchema = z.object({
   version: z.string(),
   tradition_id: z.string(), // "lds" for beta 1.0 — see v1.2 review, "why tradition_id now"
   status: z.enum(['draft', 'published', 'superseded']),
-  content_status: z.enum(['placeholder', 'human_verified']),
+  content_status: z.enum(['placeholder', 'extracted_pending_review', 'human_verified']),
   source_file_fingerprint: z.string().nullable(),
   checksum_algorithm: z.literal('sha256'),
   item_count_by_category: z.record(z.string(), z.number().int().positive()),
@@ -65,6 +68,10 @@ export const InstrumentSchema = z.object({
   disclaimer: z.string(),
   scoring_policy_version: z.string(),
   published_at: z.string().nullable(),
+  /** The source document's own "Now Set the Score Aside" closing text, verbatim,
+   * one paragraph per array entry. The gentle-transition and reflection-result
+   * screens should quote this directly rather than paraphrasing it. */
+  outro: z.array(z.string()).optional(),
   categories: z.array(CategorySchema),
   questions: z.array(QuestionSchema),
 });
