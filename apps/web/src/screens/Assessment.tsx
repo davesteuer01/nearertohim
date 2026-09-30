@@ -130,8 +130,10 @@ export function Assessment({
           {current.categoryTitle}
         </p>
         <h2>{current.title}</h2>
+        {/* current.prompt is the source document's full question text, verbatim — it already
+            carries any "During the past X," framing inline, so timeframe_text (a best-effort,
+            not always present, isolation of that same clause) is never shown as a second copy. */}
         <p>{current.prompt}</p>
-        {current.timeframe_text && <p className="muted">{current.timeframe_text}</p>}
 
         {current.anchors && (
           <>

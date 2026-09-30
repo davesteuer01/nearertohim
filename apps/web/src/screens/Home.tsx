@@ -13,7 +13,8 @@ export function Home({
 }) {
   return (
     <div className="screen">
-      <header>
+      <header className="hero">
+        <img src="/icon-192.png" alt="" className="hero-mark" width={56} height={56} />
         <h1>Nearer to Him</h1>
         <p className="muted">
           A private, non-judgmental space to reflect on your walk with Christ. This is a reflective tool, not a
