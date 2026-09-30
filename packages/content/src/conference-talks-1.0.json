@@ -1,7 +1,20 @@
 {
-  "bundle_version": "1.0",
+  "bundle_version": "1.1",
   "content_status": "curated_starter_slice",
-  "categories_covered": ["1", "6", "9", "10", "11"],
+  "categories_covered": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+  ],
   "talks": [
     {
       "id": "2013-04-holland-lord-i-believe",
@@ -166,6 +179,237 @@
       "primary_topic_category_id": "11",
       "source": "official_topic_index",
       "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/discipleship?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2017-04-monson-kindness-charity-and-love",
+      "title": "Kindness, Charity, and Love",
+      "speaker": "Thomas S. Monson",
+      "conference_year": 2017,
+      "conference_month": "04",
+      "primary_topic_category_id": "2",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/charity?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2011-10-allred-charity-never-faileth",
+      "title": "Charity Never Faileth",
+      "speaker": "Silvia H. Allred",
+      "conference_year": 2011,
+      "conference_month": "10",
+      "primary_topic_category_id": "2",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/charity?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2025-04-strong-charity-a-sign-of-true-discipleship",
+      "title": "Charity—a Sign of True Discipleship",
+      "speaker": "Michael B. Strong",
+      "conference_year": 2025,
+      "conference_month": "04",
+      "primary_topic_category_id": "2",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/charity?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2025-04-holland-as-a-little-child",
+      "title": "As a Little Child",
+      "speaker": "Jeffrey R. Holland",
+      "conference_year": 2025,
+      "conference_month": "04",
+      "primary_topic_category_id": "3",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/humility?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2020-10-renlund-do-justly-love-mercy-walk-humbly",
+      "title": "Do Justly, Love Mercy, and Walk Humbly with God",
+      "speaker": "Dale G. Renlund",
+      "conference_year": 2020,
+      "conference_month": "10",
+      "primary_topic_category_id": "3",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/humility?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2020-10-nelson-let-god-prevail",
+      "title": "Let God Prevail",
+      "speaker": "Russell M. Nelson",
+      "conference_year": 2020,
+      "conference_month": "10",
+      "primary_topic_category_id": "3",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/humility?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2017-10-maynes-earning-the-trust-of-the-lord",
+      "title": "Earning the Trust of the Lord and Your Family",
+      "speaker": "Richard J. Maynes",
+      "conference_year": 2017,
+      "conference_month": "10",
+      "primary_topic_category_id": "4",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/integrity?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2013-04-bednar-we-believe-in-being-chaste",
+      "title": "We Believe in Being Chaste",
+      "speaker": "David A. Bednar",
+      "conference_year": 2013,
+      "conference_month": "04",
+      "primary_topic_category_id": "4",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/morality?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2011-04-dalton-guardians-of-virtue",
+      "title": "Guardians of Virtue",
+      "speaker": "Elaine S. Dalton",
+      "conference_year": 2011,
+      "conference_month": "04",
+      "primary_topic_category_id": "4",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/morality?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2010-10-uchtdorf-continue-in-patience",
+      "title": "Continue in Patience",
+      "speaker": "Dieter F. Uchtdorf",
+      "conference_year": 2010,
+      "conference_month": "10",
+      "primary_topic_category_id": "5",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/patience?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2020-10-holland-waiting-on-the-lord",
+      "title": "Waiting on the Lord",
+      "speaker": "Jeffrey R. Holland",
+      "conference_year": 2020,
+      "conference_month": "10",
+      "primary_topic_category_id": "5",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/patience?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2025-10-soares-adorned-with-the-virtue-of-temperance",
+      "title": "Adorned with the Virtue of Temperance",
+      "speaker": "Ulisses Soares",
+      "conference_year": 2025,
+      "conference_month": "10",
+      "primary_topic_category_id": "5",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/patience?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2023-04-nelson-peacemakers-needed",
+      "title": "Peacemakers Needed",
+      "speaker": "Russell M. Nelson",
+      "conference_year": 2023,
+      "conference_month": "04",
+      "primary_topic_category_id": "7",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/peacemaking?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2023-10-cook-be-peaceable-followers-of-christ",
+      "title": "Be Peaceable Followers of Christ",
+      "speaker": "Quentin L. Cook",
+      "conference_year": 2023,
+      "conference_month": "10",
+      "primary_topic_category_id": "7",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/peacemaking?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2022-04-andersen-following-jesus-being-a-peacemaker",
+      "title": "Following Jesus: Being a Peacemaker",
+      "speaker": "Neil L. Andersen",
+      "conference_year": 2022,
+      "conference_month": "04",
+      "primary_topic_category_id": "7",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/peacemaking?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2008-10-hales-christian-courage-the-price-of-discipleship",
+      "title": "Christian Courage: The Price of Discipleship",
+      "speaker": "Robert D. Hales",
+      "conference_year": 2008,
+      "conference_month": "10",
+      "primary_topic_category_id": "8",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/courage?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2014-04-monson-be-strong-and-of-a-good-courage",
+      "title": "Be Strong and of a Good Courage",
+      "speaker": "Thomas S. Monson",
+      "conference_year": 2014,
+      "conference_month": "04",
+      "primary_topic_category_id": "8",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/courage?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2017-10-eyring-fear-not-to-do-good",
+      "title": "Fear Not to Do Good",
+      "speaker": "Henry B. Eyring",
+      "conference_year": 2017,
+      "conference_month": "10",
+      "primary_topic_category_id": "8",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/courage?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2010-10-christofferson-reflections-on-a-consecrated-life",
+      "title": "Reflections on a Consecrated Life",
+      "speaker": "D. Todd Christofferson",
+      "conference_year": 2010,
+      "conference_month": "10",
+      "primary_topic_category_id": "12",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/consecration?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2022-04-uchtdorf-our-heartfelt-all",
+      "title": "Our Heartfelt All",
+      "speaker": "Dieter F. Uchtdorf",
+      "conference_year": 2022,
+      "conference_month": "04",
+      "primary_topic_category_id": "12",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/consecration?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2011-10-eyring-a-witness",
+      "title": "A Witness",
+      "speaker": "Henry B. Eyring",
+      "conference_year": 2011,
+      "conference_month": "10",
+      "primary_topic_category_id": "12",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/consecration?lang=eng",
       "review_status": "pending"
     }
   ]

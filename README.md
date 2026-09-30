@@ -76,11 +76,37 @@ verified question's `review_status` to `"verified"`, and the bundle's `source_fi
 should be computed and stored (see `packages/content/src/fingerprint.ts`) so future loads fail
 closed if the content ever drifts from what you verified.
 
+## M2 phase: mentor, conference talks, journal (Dave's standing decision, 30 Sep 2026)
+
+M1 is the baseline self-assessment (the 103-question instrument and score). M2 answers "now I
+have a score, what do I do with this" — a per-category mentor screen reachable from the result
+screen's "Reflect further" link, with:
+
+- A self-declared "where do I see myself right now" note (never generated or inferred).
+- Curated general-conference talks for that category's topic.
+- A running journal.
+
+All three are local-only, in the person's own words, stored in new Dexie tables
+(`mentorMemory`, `doctrinalStateNotes`, `journalEntries` — v3 migration, additive).
+
+**Conference-talk corpus** (`packages/content/src/conference-talks-1.0.json`): each talk's
+`primary_topic_category_id` is taken verbatim from the Church's own official general-conference
+topic index pages (`source: "official_topic_index"`, `topic_index_url` recorded per talk and
+verified live) — a topic classification, never a doctrinal value judgment made by this app. As
+of 30 Sep 2026 (`bundle_version: "1.1"`) all 12 categories have curated talks, 3 each (36 total).
+`content_status` stays `"curated_starter_slice"`: this is still a hand-picked sample per
+category, not the full 1985-present archive Dave has asked for — the in-app disclosure says so
+plainly rather than implying more coverage than exists.
+
 ## What isn't built yet, deliberately
 
 Per the recommended build-first slice: the attribute library, focus journeys, daily reflection,
 scripture encounter, the trend/heat-map view, note encryption, accounts/sync, and the AI companion
 are all out of scope for this slice. They're specified in the design document, not this repo.
+
+The M2 conference-talk corpus is a curated sample (3 talks/category), not the full 1985-present
+archive; the "review and assist" mentor is still static curated content and links, not yet a live
+AI conversation (that needs a real architecture decision — see below).
 
 ## Running it
 
