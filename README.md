@@ -22,8 +22,9 @@ to use on your own device.
   mismatch: it will throw rather than let the app score against unverified content.
 - **`apps/web`** — a working React + TypeScript PWA shell: Home → full assessment (linear,
   autosaving to IndexedDB via Dexie) → mandatory unanswered-item review before finishing →
-  gentle transition → reflection result (score hidden behind an explicit reveal, never shown as
-  "closer to Christ") → History. Builds cleanly with `vite build`.
+  gentle transition → reflection result (score shown directly, unapologetically, always preceded
+  by the "not a measure of your worth" statement — never shown as "closer to Christ") → History.
+  Builds cleanly with `vite build`.
 
 ## Content status: real text, pending your sign-off
 
@@ -49,6 +50,26 @@ done the extraction half. So every question is marked `review_status: "pending"`
 instrument as a whole is `content_status: "extracted_pending_review"` — a distinct, honest status
 from both `"placeholder"` (fake text) and `"human_verified"` (your sign-off recorded). The app's
 Home screen shows a banner reflecting exactly that: real wording, not yet your final check.
+
+## Doctrinal source policy (Dave's standing decision, 29 Sep 2026)
+
+`scripture_references` on every question is **canon only** — Old Testament, New Testament, Book
+of Mormon, Doctrine and Covenants, Pearl of Great Price. This canon must always be sufficient on
+its own to satisfy the doctrinal-reference criteria for every item; nothing in this instrument
+ever depends on anything beyond it to be complete or accurate. General conference talks are
+secondary, optional, supplemental material only — for pondering/further reading, never required
+— and have their own separate schema field, `supplemental_references`, so they can never be
+confused with or silently substituted for canon. v1.0 carries none yet; that field is empty
+everywhere by design.
+
+While re-verifying the canon-only rule, the extraction script was found to have a real citation
+bug: the source uses `;` both between different books *and* between two citations in the same
+book with the book name dropped the second time (e.g. `Ephesians 5:25; 6:1-4` means Ephesians
+5:25 and Ephesians 6:1-4). The naive split silently produced 13 bare, unattributed citations
+like `84:33-44` and `60:13`. Fixed in `scripts/extract_instrument.py` (a bare `chapter:verse`
+fragment now inherits the previous fragment's book name) and re-extracted; counts are unchanged
+(103 items, same 12/9/8/8/8/8/9/8/10/8/6/9 split). Covered by an automated regression test in
+`packages/content/src/index.test.ts`.
 
 Once you've done that page-by-page review, flip `content_status` to `"human_verified"`, set each
 verified question's `review_status` to `"verified"`, and the bundle's `source_file_fingerprint`

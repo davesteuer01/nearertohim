@@ -37,7 +37,18 @@ export const QuestionSchema = z.object({
       z.literal('NOT_YET_APPLICABLE'),
     ])
     .optional(),
+  // Canon doctrinal sources ONLY (Old Testament, New Testament, Book of Mormon,
+  // Doctrine and Covenants, Pearl of Great Price). Per Dave's explicit standing
+  // decision, this canon must always be sufficient on its own to satisfy the
+  // instrument's doctrinal-reference criteria for every item — nothing here
+  // ever depends on a conference talk to be complete or accurate.
   scripture_references: z.array(z.string()),
+  // General conference talks — secondary, optional, supplemental-only material
+  // for pondering/further reading. Never required, never counted toward the
+  // doctrinal-reference criteria, and never mixed into scripture_references
+  // above. Empty for the whole v1.0 instrument by design; kept as its own
+  // field precisely so a future addition can't accidentally blur the two.
+  supplemental_references: z.array(z.string()).optional(),
   christ_example: z.string(),
   reflection_prompt: z.string(),
   source_locator: z.string(),

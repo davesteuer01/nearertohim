@@ -6,6 +6,7 @@ import { Home } from './screens/Home';
 import { Assessment } from './screens/Assessment';
 import { ReflectionResult } from './screens/ReflectionResult';
 import { History } from './screens/History';
+import { AgeGate } from './screens/AgeGate';
 
 /**
  * crypto.randomUUID() is only defined in a secure context (https:// or
@@ -42,11 +43,23 @@ export function App() {
   const [error, setError] = useState<string | null>(null);
   const [route, setRoute] = useState<Route>({ name: 'home' });
   const [hasHistory, setHasHistory] = useState(false);
+  const [accessChecked, setAccessChecked] = useState(false);
+  const [accessGranted, setAccessGranted] = useState(false);
 
   useEffect(() => {
     getInstrument()
       .then(setInstrument)
       .catch((e) => setError(String(e?.message ?? e)));
+  }, []);
+
+  useEffect(() => {
+    db.access
+      .get('device')
+      .then((row) => {
+        setAccessGranted(!!row);
+        setAccessChecked(true);
+      })
+      .catch(() => setAccessChecked(true));
   }, []);
 
   useEffect(() => {
@@ -72,8 +85,12 @@ export function App() {
     );
   }
 
-  if (!instrument) {
+  if (!instrument || !accessChecked) {
     return <div className="screen">Loading…</div>;
+  }
+
+  if (!accessGranted) {
+    return <AgeGate onDone={() => setAccessGranted(true)} />;
   }
 
   async function startAssessment() {

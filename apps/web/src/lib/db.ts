@@ -23,6 +23,31 @@ export interface SessionRow {
   scoring_policy_version: string;
 }
 
+/**
+ * Age gate + guardian consent, per Dave's 29 Sep 2026 decision: launch is
+ * 18+ by default, and a person who is under 18 may proceed only with a
+ * recorded guardian consent. One row per device (singleton, id: 'device').
+ * This is a first real version of the consent system, not a stub — but it
+ * is intentionally still local-only (no verification that the "guardian"
+ * filling this in is actually an adult, no email confirmation sent). That
+ * gap is flagged explicitly in the README rather than glossed over, since
+ * Section 1's "never make the judgment call alone" rule applies here too:
+ * a truly verified consent flow (e.g. a confirmation email round-trip) is a
+ * decision for a human reviewer to design, not something to fake locally.
+ */
+export interface AccessRow {
+  id: 'device';
+  status: 'adult_confirmed' | 'minor_with_guardian_consent';
+  confirmed_at: string;
+  guardian_consent?: {
+    guardian_name: string;
+    guardian_email: string;
+    relationship_to_minor: string;
+    consent_statement_version: string;
+    consented_at: string;
+  };
+}
+
 export interface AnswerRow {
   /** Composite key `${session_id}:${question_id}` set as `id`. */
   id: string;
@@ -41,16 +66,23 @@ export interface AnswerRow {
 class NearerToHimDB extends Dexie {
   sessions!: EntityTable<SessionRow, 'id'>;
   answers!: EntityTable<AnswerRow, 'id'>;
+  access!: EntityTable<AccessRow, 'id'>;
 
   constructor() {
     super('nearertohim');
-    // MIGRATION NOTES: this is version 1. When the schema changes, add a
-    // new `.version(N).stores({...}).upgrade(tx => {...})` block below
-    // rather than editing this one, so existing sessions/answers on a
-    // person's device survive the upgrade (Phase 2 exit test).
+    // MIGRATION NOTES: additive only. Each new version adds a new
+    // `.version(N).stores({...})` block rather than editing an old one, so
+    // existing sessions/answers on a person's device survive the upgrade
+    // (Phase 2 exit test). Dexie carries forward any store unchanged
+    // between versions automatically.
     this.version(1).stores({
       sessions: 'id, status, started_at',
       answers: 'id, session_id, question_id',
+    });
+    this.version(2).stores({
+      sessions: 'id, status, started_at',
+      answers: 'id, session_id, question_id',
+      access: 'id',
     });
   }
 }

@@ -15,7 +15,6 @@ export function ReflectionResult({
 }) {
   const [session, setSession] = useState<SessionRow | null>(null);
   const [result, setResult] = useState<ReturnType<typeof scoreSession> | null>(null);
-  const [revealed, setRevealed] = useState(false);
   const [settled, setSettled] = useState(false); // the "now set the score aside" beat
 
   useEffect(() => {
@@ -100,27 +99,29 @@ export function ReflectionResult({
         </p>
       </div>
 
-      {!revealed ? (
-        <button type="button" className="btn" onClick={() => setRevealed(true)}>
-          Reveal the numbers
-        </button>
-      ) : (
-        <div className="card">
-          <p className="muted" style={{ fontSize: '0.85rem' }}>
-            This is a self-reported pattern on this assessment — never a measure of how close you are to Christ.
-          </p>
-          <h3>Overall: {result.overall === null ? 'Not enough answered yet' : `${roundForDisplay(result.overall)}`}</h3>
-          <ul style={{ paddingLeft: 18 }}>
-            {Object.entries(result.categories).map(([catId, cat]) => (
-              <li key={catId}>
-                {catById[catId]?.title ?? catId}:{' '}
-                {cat.score === null ? 'not enough answered' : roundForDisplay(cat.score)}
-                {!cat.eligible && cat.score !== null && ' (below the coverage threshold — shown for reference only)'}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/*
+        Shown directly, unapologetically — per the leadership consensus of 29 Sep 2026: a
+        person can't be honest with themselves about where they are if the number is hidden
+        behind a click. The disclaimer below is what carries the care, not a hide/reveal step.
+      */}
+      <div className="card">
+        <p className="muted" style={{ fontSize: '0.9rem' }}>
+          This score is not a measure of your worth, and it never measures your standing before
+          God. It exists for one reason: to help point you to the material and practices that can
+          best serve you right now, wherever "right now" honestly is. Presented with the same
+          love regardless of the number.
+        </p>
+        <h3>Overall: {result.overall === null ? 'Not enough answered yet' : `${roundForDisplay(result.overall)}`}</h3>
+        <ul style={{ paddingLeft: 18 }}>
+          {Object.entries(result.categories).map(([catId, cat]) => (
+            <li key={catId}>
+              {catById[catId]?.title ?? catId}:{' '}
+              {cat.score === null ? 'not enough answered' : roundForDisplay(cat.score)}
+              {!cat.eligible && cat.score !== null && ' (below the coverage threshold — shown for reference only)'}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <button type="button" className="btn btn-quiet" onClick={onHome}>
         ← Home

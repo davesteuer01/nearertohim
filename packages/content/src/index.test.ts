@@ -47,4 +47,30 @@ describe('loadInstrument', () => {
       expect(q.review_status).toBe('pending');
     }
   });
+
+  it('every scripture reference names a canon book — no bare "chapter:verse" and no conference talk mixed in', async () => {
+    const instrument = await loadInstrument();
+    // A bare fragment like "84:33-44" (no book name) is a citation with the
+    // book name silently dropped, not a valid reference. Regression test for
+    // the extractor bug where the source's ";"-separated same-book follow-up
+    // citations (e.g. "Doctrine and Covenants 20:77, 79; 84:33-44") lost the
+    // book name on the second citation.
+    const bareFragment = /^\s*\d+:/;
+    // Standing rule: canon only in scripture_references. A conference talk
+    // is never a valid entry here (see supplemental_references instead).
+    const looksLikeConferenceTalk = /\b(elder|president|sister|bishop)\b/i;
+    for (const q of instrument.questions) {
+      for (const ref of q.scripture_references) {
+        expect(ref).not.toMatch(bareFragment);
+        expect(ref).not.toMatch(looksLikeConferenceTalk);
+      }
+    }
+  });
+
+  it('v1.0 carries no supplemental (conference-talk) references yet — canon alone is complete', async () => {
+    const instrument = await loadInstrument();
+    for (const q of instrument.questions) {
+      expect(q.supplemental_references ?? []).toHaveLength(0);
+    }
+  });
 });

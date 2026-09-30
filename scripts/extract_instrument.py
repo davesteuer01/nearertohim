@@ -28,7 +28,7 @@ from docx.table import Table
 from docx.text.paragraph import Paragraph
 
 SRC = "/root/.claude/uploads/1ba7fe6f-18fd-574c-99ae-ccd4ba6c733c/9bec5a6f-1790713438353_Becoming_Like_Jesus_Beta_1.0.docx"
-OUT = Path(__file__).resolve().parent / "nearertohim" / "packages" / "content" / "src" / "instrument-1.0.json"
+OUT = Path(__file__).resolve().parent.parent / "packages" / "content" / "src" / "instrument-1.0.json"
 
 CAT_HEADING_RE = re.compile(r"^(\d{1,2})\.\s+(.*)$")
 ITEM_HEADING_RE = re.compile(r"^(\d{1,2})\.(\d{1,2})\s*-\s*(.*)$")
@@ -52,8 +52,40 @@ def strip_label(text, label):
     return m.group(1).strip() if m else text.strip()
 
 
+_BARE_VERSE_RE = re.compile(r"^\d+:")  # "84:33-44" — chapter:verse with no book name
+_BOOK_SPLIT_RE = re.compile(r"^(.+)\s(\d+:\S.*)$")  # rightmost split into book name / chapter:verse
+
+
 def parse_scripture_refs(text):
-    return [r.strip() for r in text.split(";") if r.strip()]
+    """
+    The source document separates scripture citations with ";" — but it also
+    uses ";" to separate a SECOND citation in the SAME book from the first,
+    dropping the book name the second time (e.g. "Ephesians 5:25; 6:1-4" means
+    Ephesians 5:25 and Ephesians 6:1-4, not an unnamed book chapter 6).
+    A naive split-on-";" therefore silently drops the book name off every such
+    fragment. This is a doctrinal-accuracy bug, not a cosmetic one: a citation
+    with no book name is not a verifiable reference. Fix: a fragment that is
+    bare "chapter:verse" (no book name of its own) inherits the book name of
+    the immediately preceding fragment in the same list.
+    """
+    raw = [r.strip() for r in text.split(";") if r.strip()]
+    result = []
+    last_book = None
+    for r in raw:
+        if _BARE_VERSE_RE.match(r):
+            if last_book is None:
+                # First fragment in the list is bare — nothing to inherit from.
+                # Leave as-is and let the caller's own review catch it; this
+                # should never happen against the real source text.
+                result.append(r)
+            else:
+                result.append(f"{last_book} {r}")
+            continue
+        result.append(r)
+        m = _BOOK_SPLIT_RE.match(r)
+        if m:
+            last_book = m.group(1)
+    return result
 
 
 def main():
