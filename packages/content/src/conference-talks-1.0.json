@@ -1,0 +1,172 @@
+{
+  "bundle_version": "1.0",
+  "content_status": "curated_starter_slice",
+  "categories_covered": ["1", "6", "9", "10", "11"],
+  "talks": [
+    {
+      "id": "2013-04-holland-lord-i-believe",
+      "title": "Lord, I Believe",
+      "speaker": "Jeffrey R. Holland",
+      "conference_year": 2013,
+      "conference_month": "04",
+      "primary_topic_category_id": "1",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/faith?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2025-04-wright-thou-art-the-christ",
+      "title": "Thou Art the Christ",
+      "speaker": "Amy A. Wright",
+      "conference_year": 2025,
+      "conference_month": "04",
+      "primary_topic_category_id": "1",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/faith?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2025-04-johnson-spiritually-whole-in-him",
+      "title": "Spiritually Whole in Him",
+      "speaker": "Camille N. Johnson",
+      "conference_year": 2025,
+      "conference_month": "04",
+      "primary_topic_category_id": "1",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/faith?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2012-04-uchtdorf-the-merciful-obtain-mercy",
+      "title": "The Merciful Obtain Mercy",
+      "speaker": "Dieter F. Uchtdorf",
+      "conference_year": 2012,
+      "conference_month": "04",
+      "primary_topic_category_id": "6",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/forgiveness?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2007-04-faust-the-healing-power-of-forgiveness",
+      "title": "The Healing Power of Forgiveness",
+      "speaker": "James E. Faust",
+      "conference_year": 2007,
+      "conference_month": "04",
+      "primary_topic_category_id": "6",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/forgiveness?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2018-10-holland-the-ministry-of-reconciliation",
+      "title": "The Ministry of Reconciliation",
+      "speaker": "Jeffrey R. Holland",
+      "conference_year": 2018,
+      "conference_month": "10",
+      "primary_topic_category_id": "6",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/forgiveness?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2010-10-monson-the-divine-gift-of-gratitude",
+      "title": "The Divine Gift of Gratitude",
+      "speaker": "Thomas S. Monson",
+      "conference_year": 2010,
+      "conference_month": "10",
+      "primary_topic_category_id": "9",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/gratitude?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2014-04-uchtdorf-grateful-in-any-circumstances",
+      "title": "Grateful in Any Circumstances",
+      "speaker": "Dieter F. Uchtdorf",
+      "conference_year": 2014,
+      "conference_month": "04",
+      "primary_topic_category_id": "9",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/gratitude?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "1990-04-faust-gratitude-as-a-saving-principle",
+      "title": "Gratitude As a Saving Principle",
+      "speaker": "James E. Faust",
+      "conference_year": 1990,
+      "conference_month": "04",
+      "primary_topic_category_id": "9",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/gratitude?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2026-04-kearon-about-his-business",
+      "title": "About His Business",
+      "speaker": "Patrick Kearon",
+      "conference_year": 2026,
+      "conference_month": "04",
+      "primary_topic_category_id": "10",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/service?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2024-04-bangerter-foreordained-to-serve",
+      "title": "Foreordained to Serve",
+      "speaker": "Steven R. Bangerter",
+      "conference_year": 2024,
+      "conference_month": "04",
+      "primary_topic_category_id": "10",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/service?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2024-10-stevenson-days-never-to-be-forgotten",
+      "title": "Days Never to Be Forgotten",
+      "speaker": "Gary E. Stevenson",
+      "conference_year": 2024,
+      "conference_month": "10",
+      "primary_topic_category_id": "10",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/service?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2009-04-uchtdorf-the-way-of-the-disciple",
+      "title": "The Way of the Disciple",
+      "speaker": "Dieter F. Uchtdorf",
+      "conference_year": 2009,
+      "conference_month": "04",
+      "primary_topic_category_id": "11",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/discipleship?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2014-04-holland-the-cost-and-blessings-of-discipleship",
+      "title": "The Cost—and Blessings—of Discipleship",
+      "speaker": "Jeffrey R. Holland",
+      "conference_year": 2014,
+      "conference_month": "04",
+      "primary_topic_category_id": "11",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/discipleship?lang=eng",
+      "review_status": "pending"
+    },
+    {
+      "id": "2021-10-uchtdorf-daily-restoration",
+      "title": "Daily Restoration",
+      "speaker": "Dieter F. Uchtdorf",
+      "conference_year": 2021,
+      "conference_month": "10",
+      "primary_topic_category_id": "11",
+      "source": "official_topic_index",
+      "topic_index_url": "https://www.churchofjesuschrist.org/general-conference/topics/discipleship?lang=eng",
+      "review_status": "pending"
+    }
+  ]
+}

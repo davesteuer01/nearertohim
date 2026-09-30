@@ -48,6 +48,54 @@ export interface AccessRow {
   };
 }
 
+/**
+ * M2 mentor layer — 30 Sep 2026 decision. Modeled on Resolyra's CoachMemory
+ * shape, but rebuilt natively here (not a Base44 remix) so it stays local
+ * to the device, consistent with the same privacy-first architecture as
+ * everything else in this app. `memory_type` is deliberately narrower than
+ * Resolyra's — no behavior-inference or mood-detection categories — because
+ * Section 7's rule against inferring spiritual standing from behavior
+ * applies here too: everything in this table is something the person
+ * stated about themselves, never something derived from their answers or
+ * usage patterns.
+ */
+export interface MentorMemoryRow {
+  id: string;
+  memory_type: 'goal' | 'motivation' | 'barrier' | 'preference' | 'context' | 'privacy_boundary';
+  category_id?: string; // optional link to one of the instrument's 12 categories
+  title: string;
+  detail: string;
+  created_at: string;
+  updated_at: string;
+}
+
+/**
+ * "Where I see myself" — the person's own notation of their current state
+ * for a category, distinct from a score. Always self-declared text, never
+ * generated or inferred by the app. category_id links to the instrument's
+ * category ids; talk_ids records which conference talks (if any) the
+ * person was pointed to alongside this note.
+ */
+export interface DoctrinalStateNoteRow {
+  id: string;
+  category_id: string;
+  session_id?: string;
+  state_text: string;
+  talk_ids: string[];
+  created_at: string;
+  updated_at: string;
+}
+
+/** Freeform journal/notes, optionally tied to a category or question. */
+export interface JournalEntryRow {
+  id: string;
+  category_id?: string;
+  question_id?: string;
+  text: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface AnswerRow {
   /** Composite key `${session_id}:${question_id}` set as `id`. */
   id: string;
@@ -67,6 +115,9 @@ class NearerToHimDB extends Dexie {
   sessions!: EntityTable<SessionRow, 'id'>;
   answers!: EntityTable<AnswerRow, 'id'>;
   access!: EntityTable<AccessRow, 'id'>;
+  mentorMemory!: EntityTable<MentorMemoryRow, 'id'>;
+  doctrinalStateNotes!: EntityTable<DoctrinalStateNoteRow, 'id'>;
+  journalEntries!: EntityTable<JournalEntryRow, 'id'>;
 
   constructor() {
     super('nearertohim');
@@ -83,6 +134,14 @@ class NearerToHimDB extends Dexie {
       sessions: 'id, status, started_at',
       answers: 'id, session_id, question_id',
       access: 'id',
+    });
+    this.version(3).stores({
+      sessions: 'id, status, started_at',
+      answers: 'id, session_id, question_id',
+      access: 'id',
+      mentorMemory: 'id, memory_type, category_id',
+      doctrinalStateNotes: 'id, category_id, session_id',
+      journalEntries: 'id, category_id, question_id, created_at',
     });
   }
 }

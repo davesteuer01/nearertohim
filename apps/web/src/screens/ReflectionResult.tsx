@@ -8,14 +8,18 @@ export function ReflectionResult({
   instrument,
   sessionId,
   onHome,
+  onOpenMentor,
 }: {
   instrument: Instrument;
   sessionId: string;
   onHome: () => void;
+  onOpenMentor: (categoryId: string) => void;
 }) {
   const [session, setSession] = useState<SessionRow | null>(null);
   const [result, setResult] = useState<ReturnType<typeof scoreSession> | null>(null);
   const [settled, setSettled] = useState(false); // the "now set the score aside" beat
+  const [promptText, setPromptText] = useState('');
+  const [promptSaved, setPromptSaved] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -83,6 +87,20 @@ export function ReflectionResult({
   const finalizeLabel =
     session.finalize_method === 'finished_with_unanswered' ? 'Finished with unanswered items' : 'Complete';
 
+  async function savePrompt() {
+    if (!promptText.trim()) return;
+    const now = new Date().toISOString();
+    await db.journalEntries.add({
+      id: `session:${sessionId}:${now}`,
+      text: promptText.trim(),
+      created_at: now,
+      updated_at: now,
+    });
+    setPromptText('');
+    setPromptSaved(true);
+    setTimeout(() => setPromptSaved(false), 2500);
+  }
+
   return (
     <div className="screen">
       <h2>Your reflection</h2>
@@ -93,10 +111,19 @@ export function ReflectionResult({
 
       <div className="card">
         <p>What is one thing you feel prompted to notice, study, repent of, practice, or change?</p>
-        <p className="muted" style={{ fontSize: '0.9rem' }}>
-          (Journaling that thought is optional and not built into this first slice yet — write it somewhere that's
-          meaningful to you for now.)
-        </p>
+        <textarea
+          value={promptText}
+          onChange={(e) => setPromptText(e.target.value)}
+          rows={3}
+          style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid var(--border)', fontFamily: 'inherit' }}
+          placeholder="Write it here to keep it..."
+        />
+        <div style={{ marginTop: 10, display: 'flex', gap: 12, alignItems: 'center' }}>
+          <button type="button" className="btn" onClick={savePrompt}>
+            Save
+          </button>
+          {promptSaved && <span className="muted">Saved.</span>}
+        </div>
       </div>
 
       {/*
@@ -114,10 +141,19 @@ export function ReflectionResult({
         <h3>Overall: {result.overall === null ? 'Not enough answered yet' : `${roundForDisplay(result.overall)}`}</h3>
         <ul style={{ paddingLeft: 18 }}>
           {Object.entries(result.categories).map(([catId, cat]) => (
-            <li key={catId}>
+            <li key={catId} style={{ marginBottom: 4 }}>
               {catById[catId]?.title ?? catId}:{' '}
               {cat.score === null ? 'not enough answered' : roundForDisplay(cat.score)}
               {!cat.eligible && cat.score !== null && ' (below the coverage threshold — shown for reference only)'}
+              {' · '}
+              <button
+                type="button"
+                className="btn btn-quiet"
+                style={{ padding: '2px 0', minHeight: 'auto', fontSize: '0.85rem' }}
+                onClick={() => onOpenMentor(catId)}
+              >
+                Reflect further →
+              </button>
             </li>
           ))}
         </ul>

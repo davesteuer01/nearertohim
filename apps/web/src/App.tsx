@@ -7,6 +7,7 @@ import { Assessment } from './screens/Assessment';
 import { ReflectionResult } from './screens/ReflectionResult';
 import { History } from './screens/History';
 import { AgeGate } from './screens/AgeGate';
+import { MentorCategory } from './screens/MentorCategory';
 
 /**
  * crypto.randomUUID() is only defined in a secure context (https:// or
@@ -36,7 +37,8 @@ type Route =
   | { name: 'home' }
   | { name: 'assessment'; sessionId: string }
   | { name: 'result'; sessionId: string }
-  | { name: 'history' };
+  | { name: 'history' }
+  | { name: 'mentor'; categoryId: string; sessionId?: string; returnTo: Route };
 
 export function App() {
   const [instrument, setInstrument] = useState<Instrument | null>(null);
@@ -136,6 +138,9 @@ export function App() {
           instrument={instrument}
           sessionId={route.sessionId}
           onHome={() => setRoute({ name: 'home' })}
+          onOpenMentor={(categoryId) =>
+            setRoute({ name: 'mentor', categoryId, sessionId: route.sessionId, returnTo: route })
+          }
         />
       );
     case 'history':
@@ -143,6 +148,15 @@ export function App() {
         <History
           onOpen={(sessionId) => setRoute({ name: 'result', sessionId })}
           onHome={() => setRoute({ name: 'home' })}
+        />
+      );
+    case 'mentor':
+      return (
+        <MentorCategory
+          instrument={instrument}
+          categoryId={route.categoryId}
+          sessionId={route.sessionId}
+          onBack={() => setRoute(route.returnTo)}
         />
       );
   }

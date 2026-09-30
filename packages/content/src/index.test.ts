@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { loadInstrument } from './index.js';
+import { loadInstrument, loadConferenceTalks } from './index.js';
 
 describe('loadInstrument', () => {
   it('loads the bundle, validates its shape, and freezes it', async () => {
@@ -72,5 +72,36 @@ describe('loadInstrument', () => {
     for (const q of instrument.questions) {
       expect(q.supplemental_references ?? []).toHaveLength(0);
     }
+  });
+});
+
+describe('loadConferenceTalks', () => {
+  it('loads the curated starter slice, validated and honestly labeled', async () => {
+    const bundle = await loadConferenceTalks();
+    expect(bundle.content_status).toBe('curated_starter_slice');
+    expect(bundle.talks.length).toBeGreaterThan(0);
+    // Every category a talk claims to cover must actually be declared in
+    // categories_covered — the app trusts that list to know what to show.
+    const actualCategories = new Set(bundle.talks.map((t) => t.primary_topic_category_id));
+    for (const cat of actualCategories) {
+      expect(bundle.categories_covered).toContain(cat);
+    }
+    for (const cat of bundle.categories_covered) {
+      expect(actualCategories.has(cat)).toBe(true);
+    }
+  });
+
+  it('every talk\'s topic classification traces back to an official churchofjesuschrist.org topic page', async () => {
+    const bundle = await loadConferenceTalks();
+    for (const talk of bundle.talks) {
+      expect(talk.source).toBe('official_topic_index');
+      expect(talk.topic_index_url).toMatch(/^https:\/\/www\.churchofjesuschrist\.org\/general-conference\/topics\//);
+    }
+  });
+
+  it('no two talks share an id', async () => {
+    const bundle = await loadConferenceTalks();
+    const ids = bundle.talks.map((t) => t.id);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 });

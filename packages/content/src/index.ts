@@ -3,12 +3,15 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { InstrumentSchema, verifyInstrumentShape, type Instrument } from './schema.js';
 import { verifyFingerprint } from './fingerprint.js';
+import { ConferenceTalkBundleSchema, type ConferenceTalkBundle } from './conference-talks-schema.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const instrumentJson = JSON.parse(readFileSync(resolve(__dirname, './instrument-1.0.json'), 'utf-8'));
+const conferenceTalksJson = JSON.parse(readFileSync(resolve(__dirname, './conference-talks-1.0.json'), 'utf-8'));
 
 export * from './schema.js';
 export * from './fingerprint.js';
+export * from './conference-talks-schema.js';
 
 /**
  * Loads and verifies the instrument bundle. This is the ONLY sanctioned
@@ -45,6 +48,20 @@ export async function loadInstrument(): Promise<Instrument> {
   // see apps/web — so a placeholder build can never be mistaken for real.
 
   return deepFreeze(parsed) as Instrument;
+}
+
+/**
+ * Loads and verifies the conference-talk bundle — the M2 mentor's
+ * secondary, topic-organized layer. Always validated against its schema
+ * and deep-frozen, same discipline as the instrument, but note this is a
+ * curated STARTER SLICE (content_status: 'curated_starter_slice'), not the
+ * full 1985-present corpus — `categories_covered` tells the app honestly
+ * which categories currently have any talks at all, so the UI never
+ * implies coverage that doesn't exist yet.
+ */
+export async function loadConferenceTalks(): Promise<ConferenceTalkBundle> {
+  const parsed = ConferenceTalkBundleSchema.parse(conferenceTalksJson);
+  return deepFreeze(parsed) as ConferenceTalkBundle;
 }
 
 /** Object.freeze is shallow; content correctness depends on nested
